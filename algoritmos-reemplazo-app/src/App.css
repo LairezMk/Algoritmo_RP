@@ -40,3 +40,32 @@
 .read-the-docs {
   color: #888;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Estilo por defecto (claro) */
+body {
+  background-color: white;
+  color: black;
+}
+
+/* Modo oscuro */
+body.dark {
+  background-color: #121212;
+  color: white;
+}
+
+/* Estilos del contenido */
+.contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Centrado vertical */
+}
