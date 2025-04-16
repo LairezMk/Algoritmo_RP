@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEffect } from "react";
 
 export default function PanelInputs({
   referencias,
@@ -9,7 +10,18 @@ export default function PanelInputs({
   setColor,
   onGenerar,
 }) {
-  const [entradaTexto, setEntradaTexto] = useState("");
+  const valoresIniciales = "7, 0, 1, 2, 0, 3, 0";
+  const [entradaTexto, setEntradaTexto] = useState(valoresIniciales);
+
+  useEffect(() => {
+    const valores = valoresIniciales
+      .split(/[\s,]+/)
+      .map((v) => parseInt(v))
+      .filter((v) => !isNaN(v));
+
+    setReferencias(valores);
+  }, [setReferencias]);
+
 
   const manejarCambioReferencias = (e) => {
     setEntradaTexto(e.target.value);
@@ -34,6 +46,7 @@ export default function PanelInputs({
           onChange={manejarCambioReferencias}
           className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
           placeholder="Ej. 7, 0, 1, 2, 0, 3, 0"
+          
         />
       </div>
 
