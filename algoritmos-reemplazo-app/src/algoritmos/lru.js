@@ -29,7 +29,7 @@
 
 // LRU([7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2, 0], 3); 
 
-export function LRU(referencias, marcos) {
+export default function LRU(referencias, marcos) {
     let memoria = new Array(marcos).fill(null); // Inicializa la memoria con marcos vacíos
     let indices = new Array(marcos).fill(-1); // Inicializa los índices de las páginas en memoria con -1, indicando que están vacíos
     let pasos = []; // Inicializa un array para almacenar los pasos
@@ -60,4 +60,4 @@ export function LRU(referencias, marcos) {
   
 
   
-console.log(LRU([1 , 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5], 4)); 
+console.log(LRU([3,2,1,5,4,1,7,2,1,3,4,0], 3)); 

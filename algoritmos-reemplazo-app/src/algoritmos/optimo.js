@@ -43,7 +43,7 @@ function Optimo(referencias, marcos){
 
 }
 
-console.log(Optimo([7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0], 3));
+console.log(Optimo([3,2,1,5,4,1,7,2,1,3,4,0], 3));
 
 export default Optimo;
 

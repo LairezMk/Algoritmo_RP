@@ -4,6 +4,60 @@ import FrameDisplay from './components/FrameDisplay'
 import SolicitarDatos from './components/inputs'
 import "./App.css" // Importa el archivo CSS para estilos
 
+import FIFO from './algoritmos/fifo'
+import LRU from './algoritmos/lru'
+import FIFOPlus from './algoritmos/fifo+'
+import Optimo from './algoritmos/optimo'
+
+function App(){
+    const [pasos, setPasos]= useState([]) // Estado para almacenar los pasos del algoritmo
+    const [color, setColor]= useState('#007bff') // Estado para almacenar el color del borde de la tabla
+
+    const handleSimulacion= ({algoritmo, referencias, marcos, color}) =>{
+
+        let resultado=[] // Estado para almacenar el resultado de la simulación
+        switch (algoritmo){
+
+            case 'FIFO':
+                resultado = FIFO(referencias, marcos);
+                break;
+            case 'LRU':
+                resultado = LRU(referencias, marcos);
+                break;
+            case 'FIFOPlus':
+                resultado = FIFOPlus(referencias, marcos);
+                break;
+            case 'Optimo':
+                resultado= Optimo(referencias, marcos);
+                break;
+            default:
+                alert('Algoritmo no válido');
+                return;
+        }
+
+        setPasos(resultado); // Actualiza el estado de pasos con el resultado de la simulación
+        setColor(color); // Actualiza el estado de color con el color seleccionado
+   };
+
+
+    return(
+        <div className="min-h-screen bg-gray-50 p-4">
+            <SolicitarDatos onSimular={handleSimulacion}/>
+            {pasos.length > 0 && (
+                <div className='mt-6'>
+                    <FrameDisplay pasos={pasos} color={color} />
+                </div>
+                )}
+        </div>
+    );
+
+};
+
+export default App;
+
+
+
+
 // function App() {
 //   const ejemploPasos = [
 //     { pagina: 7, memoria: [7, null, null], fallo: true },
@@ -47,25 +101,3 @@ import "./App.css" // Importa el archivo CSS para estilos
 // export default App;
 
 
-
-// function App() {
-//   const [modoOscuro, setModoOscuro] = useState(false);
-
-//   const alternarModo = () => setModoOscuro(!modoOscuro);
-
-//   // Aplicar clase al <body> directamente para afectar todo
-//   useEffect(() => {
-//     document.body.className = modoOscuro ? "dark" : "";
-//   }, [modoOscuro]);
-
-//   return (
-//     <div className="contenido">
-//       <h1>{modoOscuro ? "🌙 Modo Oscuro" : "☀️ Modo Claro"}</h1>
-//       <button onClick={alternarModo}>
-//         Cambiar a {modoOscuro ? "modo claro" : "modo oscuro"}
-//       </button>
-//     </div>
-//   );
-// }
-
-// export default App;
