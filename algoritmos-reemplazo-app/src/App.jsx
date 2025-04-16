@@ -7,11 +7,12 @@ import Optimo from './algoritmos/optimo';
 import PanelInputs from './components/PanelInputs';
 import VistaAlgoritmo from "./components/VistaAlgoritmo";
 
+
 function App() {
   const [algoritmoActivo, setAlgoritmoActivo] = useState("FIFO");
   const [referencias, setReferencias] = useState([]);
   const [marcos, setMarcos] = useState(3);
-  const [color, setColor] = useState("#333");
+  const [color, setColor] = useState("#aabbcc");
   const [pasos, setPasos] = useState([]);
 
   const ejecutarAlgoritmo = () => {
@@ -39,44 +40,46 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen p-6 bg-gray-100 text-gray-800 flex flex-col gap-6">
-      {/* Panel de entradas */}
-      <PanelInputs
-        referencias={referencias}
-        setReferencias={setReferencias}
-        marcos={marcos}
-        setMarcos={setMarcos}
-        color={color}
-        setColor={setColor}
-        onGenerar={ejecutarAlgoritmo}
-      />
-
-      {/* Tabs Manuales */}
-      <div className="flex gap-4">
-        {["FIFO", "LRU", "FIFOPlus", "Optimo"].map((alg) => (
-          <button
-            key={alg}
-            onClick={() => setAlgoritmoActivo(alg)}
-            className={`px-4 py-2 rounded-lg font-medium transition duration-200 ${
-              algoritmoActivo === alg
-                ? "bg-blue-600 text-white"
-                : "bg-white border border-gray-300 text-gray-800"
-            }`}
-          >
-            {alg}
-          </button>
-        ))}
+    <div className="min-h-screen bg-gray-100 text-gray-800 flex">
+      {/* Sidebar izquierdo */}
+      <div className="w-80 p-6">
+        <PanelInputs
+          referencias={referencias}
+          setReferencias={setReferencias}
+          marcos={marcos}
+          setMarcos={setMarcos}
+          color={color}
+          setColor={setColor}
+          onGenerar={ejecutarAlgoritmo}
+        />
       </div>
 
-      {/* Vista del algoritmo seleccionado */}
-      <div className="mt-4">
-        <VistaAlgoritmo pasos={pasos} color={color} />
+      {/* Contenido derecho */}
+      <div className="flex-1 p-6 flex flex-col gap-6">
+        {/* Tabs Manuales */}
+        <div className="flex gap-4">
+          {["FIFO", "LRU", "FIFOPlus", "Optimo"].map((alg) => (
+            <button
+              key={alg}
+              onClick={() => setAlgoritmoActivo(alg)}
+              className={`px-4 py-2 rounded-lg font-medium transition duration-200 ${
+                algoritmoActivo === alg
+                  ? "bg-blue-600 text-white"
+                  : "bg-white border border-gray-300 text-gray-800"
+              }`}
+            >
+              {alg}
+            </button>
+          ))}
+        </div>
+
+        {/* Vista del algoritmo seleccionado */}
+        <div className="flex-1 overflow-auto">
+          <VistaAlgoritmo algoritmoActivo={algoritmoActivo} resultados={{ [algoritmoActivo]: pasos }} color={color} />
+        </div>
       </div>
     </div>
   );
 }
-
-
-
 
 export default App;
