@@ -3,6 +3,7 @@ import { useState } from 'react'
 import FrameDisplay from './components/FrameDisplay'
 import SolicitarDatos from './components/inputs'
 import "./App.css" // Importa el archivo CSS para estilos
+//import PasoTable from './components/FrameDisplay'
 
 import FIFO from './algoritmos/fifo'
 import LRU from './algoritmos/lru'
