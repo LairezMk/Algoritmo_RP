@@ -26,7 +26,7 @@ const FrameDisplay = ({ pasos, color = '#333', delay = 1000 }) => {
          className="p-6 rounded-xl shadow-lg border-4"
          style={{
            borderColor: color,
-           backgroundColor: '#f9fafb',
+           backgroundColor: '#10ff20', // light gray background
          }}
       >
         <table className="table-auto border-collapse mx-auto w-full text-sm text-center">
@@ -39,7 +39,7 @@ const FrameDisplay = ({ pasos, color = '#333', delay = 1000 }) => {
                   className="border px-3 py-2 font-semibold"
                   style={{ borderColor: color }}
                 >
-                  Paso {index + 1}
+                  P {index + 1}
                 </th>
               ))}
             </tr>

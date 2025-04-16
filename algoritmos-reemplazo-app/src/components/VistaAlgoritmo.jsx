@@ -1,3 +1,6 @@
+import React from 'react';
+import FrameDisplay from './FrameDisplay';
+
 const VistaAlgoritmo = ({ algoritmoActivo, resultados, color }) => {
   const pasos = resultados?.[algoritmoActivo] || [];
 
