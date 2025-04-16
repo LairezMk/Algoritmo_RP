@@ -195,71 +195,78 @@
 // }
 
 
-export default function FIFOPlus (sequence, numPages) {
-  //let sequenceArray = sequence.split(',').map(Number);
-  let sequenceArray = sequence;
-  let pageFaults = 0;
-  let framesArray = new Array(numPages).fill("-");
-  let framesArrayTime = new Array(numPages).fill(0);
-  let secondChance = new Array(numPages).fill(false);
-  let resultMatrix = [];
-
-  for (let i = 0; i < sequenceArray.length; i++) { 
+export default function FIFOPlus(sequence, numPages) {
+    let sequenceArray = sequence;
+    let framesArray = new Array(numPages).fill(null);
+    let framesArrayTime = new Array(numPages).fill(0);
+    let secondChance = new Array(numPages).fill(false);
+    let pasos = [];
+  
+    for (let i = 0; i < sequenceArray.length; i++) {
       let page = sequenceArray[i];
-      if (!framesArray.includes(page)) { 
-          pageFaults++;
-          if (framesArray.includes("-")){
-              for (let j = 0; j < framesArray.length; j++){
-                  if (framesArray[j] == "-"){
-                      framesArray[j] = page;
-                      framesArrayTime[j] = 0;
-                      break;
-                  }
-              }
-          } else {
-              let exit
-              let indexTime = framesArrayTime.indexOf(Math.max(...framesArrayTime));
-              for (let j = 0; j < framesArray.length; j++){ 
-                  if (secondChance[indexTime] == false){
-                      framesArray[indexTime] = page;
-                      framesArrayTime[indexTime] = 0;
-                      secondChance[indexTime] = false;
-                      exit = true;
-                      break;
-                  } else {
-                      secondChance[indexTime] = false;
-                      let framesArrayTimeCopy = [...framesArrayTime]
-                      indexTime = framesArrayTime.indexOf(framesArrayTimeCopy.sort((a, b) => a - b)[1]);
-                      framesArray[indexTime] = page;
-                      framesArrayTime[indexTime] = 0;
-                      secondChance[indexTime] = false;
-                      exit = true;
-                  }
-              }
-              if (exit == undefined){
-                  let indexTime = framesArrayTime.indexOf(Math.max(...framesArrayTime));
-                  framesArray[indexTime] = page;
-                  framesArrayTime[indexTime] = 0;
-              }
+      let fallo = false;
+  
+      if (!framesArray.includes(page)) {
+        fallo = true;
+  
+        if (framesArray.includes(null)) {
+          for (let j = 0; j < framesArray.length; j++) {
+            if (framesArray[j] === null) {
+              framesArray[j] = page;
+              framesArrayTime[j] = 0;
+              break;
+            }
           }
+        } else {
+          let replaced = false;
+          let indexTime = framesArrayTime.indexOf(Math.max(...framesArrayTime));
+  
+          for (let j = 0; j < framesArray.length; j++) {
+            if (!secondChance[indexTime]) {
+              framesArray[indexTime] = page;
+              framesArrayTime[indexTime] = 0;
+              secondChance[indexTime] = false;
+              replaced = true;
+              break;
+            } else {
+              secondChance[indexTime] = false;
+              let framesArrayTimeCopy = [...framesArrayTime];
+              indexTime = framesArrayTime.indexOf(framesArrayTimeCopy.sort((a, b) => a - b)[1]);
+              framesArray[indexTime] = page;
+              framesArrayTime[indexTime] = 0;
+              secondChance[indexTime] = false;
+              replaced = true;
+            }
+          }
+  
+          if (!replaced) {
+            let indexTime = framesArrayTime.indexOf(Math.max(...framesArrayTime));
+            framesArray[indexTime] = page;
+            framesArrayTime[indexTime] = 0;
+          }
+        }
       } else {
-          let indexTime = framesArray.indexOf(page);
-          secondChance.fill(false);
-          secondChance[indexTime] = true;
+        let indexTime = framesArray.indexOf(page);
+        secondChance.fill(false);
+        secondChance[indexTime] = true;
       }
-      for (let j = 0; j < framesArrayTime.length; j++){
-          if (framesArray[j] != "-"){
-              framesArrayTime[j]++;
-          }
+  
+      for (let j = 0; j < framesArrayTime.length; j++) {
+        if (framesArray[j] !== null) {
+          framesArrayTime[j]++;
+        }
       }
-      //console.log("Frames: ", framesArray, "Time: ", framesArrayTime, "Second: ", secondChance)
-      resultMatrix.push([...framesArray]);
+  
+      pasos.push({
+        pagina: page,
+        memoria: [...framesArray],
+        fallo: fallo
+      });
+    }
+  
+    return pasos;
   }
-  return {
-      pageFaults,
-      resultMatrix
-  };
-}
+  
 
 console.log(FIFOPlus([7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0], 3)); // Ejemplo de uso: [1, 2, 3] -> 4 fallos
 console.log(FIFOPlus([3,2,1,5,4,1,7,2,1,3,4,0], 3));
