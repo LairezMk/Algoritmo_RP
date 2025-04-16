@@ -26,18 +26,18 @@ const FrameDisplay = ({ pasos, color = '#333', delay = 1000 }) => {
          className="p-6 rounded-xl shadow-lg border-4"
          style={{
            borderColor: color,
-           backgroundColor: '#10ff20', // light gray background
+           backgroundColor: '#94B1EB', // light gray background
          }}
       >
         <table className="table-auto border-collapse mx-auto w-full text-sm text-center">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="bg-100">
               <th className="border px-3 py-2 rounded-tl-xl"> </th>
               {historial.map((_, index) => (
                 <th
                   key={index}
                   className="border px-3 py-2 font-semibold"
-                  style={{ borderColor: color }}
+                  style={{ backgroundColor: '#D5D3E3' }}
                 >
                   P {index + 1}
                 </th>
@@ -55,7 +55,7 @@ const FrameDisplay = ({ pasos, color = '#333', delay = 1000 }) => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: i * 0.1 }}
-                  style={{ borderColor: color }}
+                  style={{ backgroundColor: '#D5D3E3' }}
                 >
                   {paso.pagina}
                 </motion.td>
@@ -73,11 +73,11 @@ const FrameDisplay = ({ pasos, color = '#333', delay = 1000 }) => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: i * 0.1 + 0.05 }}
-                    style={{ borderColor: color }}
+                    style={{ backgroundColor: '#D5D3E3' }}
                   >
                     <span
                       className="inline-block w-9 h-9 leading-9 rounded-lg border shadow-sm"
-                      style={{ borderColor: color }}
+                      style={{ backgroundColor: '#D5D3E3' }}
                     >
                       {paso.memoria[marcoIndex] ?? '-'}
                     </span>
@@ -97,7 +97,7 @@ const FrameDisplay = ({ pasos, color = '#333', delay = 1000 }) => {
                   animate={{ opacity: 1 }}
                   transition={{ delay: i * 0.1 + 0.1 }}
                   style={{
-                    borderColor: color,
+                    backgroundColor: '#D5D3E3',
                     color: paso.fallo ? '#dc2626' : '#16a34a',
                   }}
                 >
