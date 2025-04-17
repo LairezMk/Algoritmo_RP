@@ -43,10 +43,23 @@ export default function PanelInputs({
         <input
           type="text"
           value={entradaTexto}
-          onChange={manejarCambioReferencias}
+          //Hacer que solo se puedan ingresar números enteros positivos y comas como separadores
+          onChange={(e) => {
+            const valor = e.target.value;
+            // Permitir solo números, comas y espacios
+            const valorFiltrado = valor.replace(/[^0-9, ]/g, "");
+            setEntradaTexto(valorFiltrado);
+        
+            // Convertir a un array de números enteros positivos
+            const valores = valorFiltrado
+              .split(/[\s,]+/) // Separar por comas o espacios
+              .map((v) => parseInt(v))
+              .filter((v) => !isNaN(v) && v >= 0); // Filtrar valores no numéricos o negativos
+        
+            setReferencias(valores);
+          }}
           className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
           placeholder="Ej. 7, 0, 1, 2, 0, 3, 0"
-          
         />
       </div>
 
@@ -55,8 +68,15 @@ export default function PanelInputs({
         <input
           type="number"
           min="1"
+          max="5"
+          //hacer que solo se puedan ingresar números enteros positivos entre el rango definido
           value={marcos}
-          onChange={(e) => setMarcos(Number(e.target.value))}
+          onChange={(e) => {
+            const valor = e.target.value;
+            if (valor === "" || (Number(valor) >= 1 && Number(valor) <= 5)) {
+              setMarcos(valor === "" ? "" : Number(valor)); // Permite borrar temporalmente
+            }
+          }}
           className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
         />
       </div>

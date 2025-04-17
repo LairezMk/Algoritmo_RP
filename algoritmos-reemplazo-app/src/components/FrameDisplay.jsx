@@ -74,7 +74,19 @@ const FrameDisplay = ({ pasos, color = '#333', delay = 1000 }) => {
                     animate={{ opacity: 1 }}
                     transition={{ delay: i * 0.1 + 0.05 }}
                     style={{ backgroundColor: '#D5D3E3' }}
-                  >
+                  >{/* Ícono de vida extra si el marco tiene vida extra */}
+                  {paso.vidaExtra && paso.vidaExtra === marcoIndex && (
+                    <div
+                      className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                      title="Vida extra"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+                    </svg>
+
+                    </div>
+                  )}
+                  
                     <span
                       className="inline-block w-9 h-9 leading-9 rounded-lg border shadow-sm"
                       style={{ backgroundColor: '#D5D3E3' }}
@@ -101,7 +113,7 @@ const FrameDisplay = ({ pasos, color = '#333', delay = 1000 }) => {
                     color: paso.fallo ? '#dc2626' : '#16a34a',
                   }}
                 >
-                  {paso.fallo ? '✗' : '✓'}
+                  {paso.fallo ? '✗' : '✓'} {/* Mostrar un símbolo de fallo o éxito */}
                 </motion.td>
               ))}
             </tr>

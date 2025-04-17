@@ -260,7 +260,8 @@ export default function FIFOPlus(sequence, numPages) {
       pasos.push({
         pagina: page,
         memoria: [...framesArray],
-        fallo: fallo
+        fallo: fallo,
+        vidaExtra: [...secondChance],
       });
     }
   
@@ -269,5 +270,5 @@ export default function FIFOPlus(sequence, numPages) {
   
 
 console.log(FIFOPlus([7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0], 3)); // Ejemplo de uso: [1, 2, 3] -> 4 fallos
-console.log(FIFOPlus([3,2,1,5,4,1,7,2,1,3,4,0], 3));
-console.log(FIFOPlus([1,2,3,4,1,2,5,1,2,3,4,5], 3));
+//console.log(FIFOPlus([3,2,1,5,4,1,7,2,1,3,4,0], 3));
+//console.log(FIFOPlus([1,2,3,4,1,2,5,1,2,3,4,5], 3));
