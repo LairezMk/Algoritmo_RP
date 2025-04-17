@@ -76,10 +76,13 @@ const FrameDisplay = ({ pasos, color = '#b9cef3', delay = 1000 }) => {
                     style={{ backgroundColor: '#e7ecf5' }}
                   >
                     <span
-                      className="inline-block w-9 h-9 leading-9 rounded-lg border shadow-sm"
+                      className="inline-block w-9 h-9 leading-9 rounded-lg border shadow-sm relative"
                       style={{ backgroundColor: '#e7ecf5' }}
                     >
                       {paso.memoria[marcoIndex] ?? '-'}
+                      {paso.vidaExtra?.[marcoIndex] && (
+                      <span className="absolute -top-1 -right-1 text-xs" style={{fontSize: '1.1rem'}}  >🛡️</span>
+                      )}
                     </span>
                   </motion.td>
                 ))}

@@ -1,5 +1,6 @@
 import "./App.css" // Importa el archivo CSS para estilos
 import { useState } from 'react';
+import { useEffect } from 'react';
 import FIFO from './algoritmos/fifo';
 import LRU from './algoritmos/lru';
 import FIFOPlus from './algoritmos/fifo+';
@@ -14,7 +15,10 @@ function App() {
   const [marcos, setMarcos] = useState(3);
   const [color, setColor] = useState("#aabbcc");
   const [pasos, setPasos] = useState([]);
+  //const [esOscuro, setEsOscuro] = useState(false);
 
+   
+  
   const ejecutarAlgoritmo = () => {
     if (!referencias.length || marcos <= 0) return;
 
@@ -40,9 +44,9 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-800 flex">
+    <div className="min-h-screen w-screen bg-gray-100 text-gray-800 flex">
       {/* Sidebar izquierdo */}
-      <div className="w-80 p-6">
+      <div className="w-64 px-4 py-6 border-r border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-md">
         <PanelInputs
           referencias={referencias}
           setReferencias={setReferencias}
@@ -51,13 +55,14 @@ function App() {
           color={color}
           setColor={setColor}
           onGenerar={ejecutarAlgoritmo}
+      
         />
       </div>
 
       {/* Contenido derecho */}
-      <div className="flex-1 p-6 flex flex-col gap-6">
+      <div className="flex-1 p-4 flex flex-col gap-4">
         {/* Tabs Manuales */}
-        <div className="flex gap-4">
+        <div className="flex gap-4 justify-center">
           {["FIFO", "LRU", "FIFOPlus", "Optimo"].map((alg) => (
             <button
               key={alg}
