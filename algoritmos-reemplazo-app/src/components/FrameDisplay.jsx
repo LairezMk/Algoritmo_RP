@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const FrameDisplay = ({ pasos, color = '#333', delay = 1000 }) => {
+const FrameDisplay = ({ pasos, color = '#b9cef3', delay = 1000 }) => {
   const [pasoActual, setPasoActual] = useState(0);
   const [historial, setHistorial] = useState([]);
 
@@ -26,7 +26,7 @@ const FrameDisplay = ({ pasos, color = '#333', delay = 1000 }) => {
          className="p-6 rounded-xl shadow-lg border-4"
          style={{
            borderColor: color,
-           backgroundColor: '#94B1EB', // light gray background
+           backgroundColor: '#e3d7fa', // light gray background
          }}
       >
         <table className="table-auto border-collapse mx-auto w-full text-sm text-center">
@@ -37,7 +37,7 @@ const FrameDisplay = ({ pasos, color = '#333', delay = 1000 }) => {
                 <th
                   key={index}
                   className="border px-3 py-2 font-semibold"
-                  style={{ backgroundColor: '#D5D3E3' }}
+                  style={{ backgroundColor: '#e7ecf5' }}
                 >
                   P {index + 1}
                 </th>
@@ -55,7 +55,7 @@ const FrameDisplay = ({ pasos, color = '#333', delay = 1000 }) => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: i * 0.1 }}
-                  style={{ backgroundColor: '#D5D3E3' }}
+                  style={{ backgroundColor: '#e7ecf5' }}
                 >
                   {paso.pagina}
                 </motion.td>
@@ -73,23 +73,11 @@ const FrameDisplay = ({ pasos, color = '#333', delay = 1000 }) => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: i * 0.1 + 0.05 }}
-                    style={{ backgroundColor: '#D5D3E3' }}
-                  >{/* Ícono de vida extra si el marco tiene vida extra */}
-                  {paso.vidaExtra && paso.vidaExtra === marcoIndex && (
-                    <div
-                      className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                      title="Vida extra"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-                    </svg>
-
-                    </div>
-                  )}
-                  
+                    style={{ backgroundColor: '#e7ecf5' }}
+                  >
                     <span
                       className="inline-block w-9 h-9 leading-9 rounded-lg border shadow-sm"
-                      style={{ backgroundColor: '#D5D3E3' }}
+                      style={{ backgroundColor: '#e7ecf5' }}
                     >
                       {paso.memoria[marcoIndex] ?? '-'}
                     </span>
@@ -109,11 +97,11 @@ const FrameDisplay = ({ pasos, color = '#333', delay = 1000 }) => {
                   animate={{ opacity: 1 }}
                   transition={{ delay: i * 0.1 + 0.1 }}
                   style={{
-                    backgroundColor: '#D5D3E3',
+                    backgroundColor: '#e7ecf5',
                     color: paso.fallo ? '#dc2626' : '#16a34a',
                   }}
                 >
-                  {paso.fallo ? '✗' : '✓'} {/* Mostrar un símbolo de fallo o éxito */}
+                  {paso.fallo ? '✗' : '✓'}
                 </motion.td>
               ))}
             </tr>
