@@ -47,11 +47,7 @@ body {
   height: 100vh;
   width: 100vw;
   transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Estilo por defecto (claro) */
-body {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   color: black;
 }
 
