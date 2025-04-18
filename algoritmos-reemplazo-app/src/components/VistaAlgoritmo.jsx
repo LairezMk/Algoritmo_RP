@@ -27,7 +27,7 @@ const VistaAlgoritmo = ({ algoritmoActivo, resultados, color }) => {
       )}
 
       {/* Explicación del algoritmo */}
-      <div className="bg-white border border-gray-300 shadow-md rounded-lg p-4 max-w-xl mx-auto mt-6 text-left text-sm text-gray-700 animate-float">
+      <div className="bg-white border border-gray-300 shadow-md rounded-lg p-4 max-w-xl mx-auto mt-6 text-left text-sm text-gray-700">
         <h3 className="font-semibold mb-2">¿Cómo funciona {algoritmoActivo}?</h3>
         <p>{descripcion}</p>
       </div>

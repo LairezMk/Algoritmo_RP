@@ -15,6 +15,7 @@ function App() {
   const [marcos, setMarcos] = useState(3);
   const [color, setColor] = useState("#aabbcc");
   const [pasos, setPasos] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   //const [esOscuro, setEsOscuro] = useState(false);
 
    
@@ -66,10 +67,12 @@ function App() {
           {["FIFO", "LRU", "FIFOPlus", "Optimo"].map((alg) => (
             <button
               key={alg}
-              onClick={() => setAlgoritmoActivo(alg)}
+              onClick={() => {setAlgoritmoActivo(alg);
+              setPasos([]); // Limpiar pasos al cambiar de algoritmo
+              }}
               className={`px-4 py-2 rounded-lg font-medium transition duration-200 ${
                 algoritmoActivo === alg
-                  ? "bg-blue-600 text-white"
+                  ? "bg-blue-600 text-white animate-float"
                   : "bg-white border border-gray-300 text-gray-800"
               }`}
             >

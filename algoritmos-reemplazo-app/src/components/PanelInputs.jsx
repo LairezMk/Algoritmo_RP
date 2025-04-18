@@ -12,6 +12,7 @@ export default function PanelInputs({
 }) {
   const valoresIniciales = "7, 0, 1, 2, 0, 3, 0";
   const [entradaTexto, setEntradaTexto] = useState(valoresIniciales);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const valores = valoresIniciales
@@ -23,15 +24,19 @@ export default function PanelInputs({
   }, [setReferencias]);
 
 
-  const manejarCambioReferencias = (e) => {
-    setEntradaTexto(e.target.value);
-
-    const valores = e.target.value
-      .split(/[\s,]+/)
-      .map((v) => parseInt(v))
-      .filter((v) => !isNaN(v));
-
-    setReferencias(valores);
+  const manejarCambioReferencias = () => {
+    setIsLoading(true); // Activa la animación de carga
+    setTimeout(() => {
+      setEntradaTexto(valoresIniciales); // Restablece el texto de entrada
+      const valores = valoresIniciales
+        .split(/[\s,]+/)
+        .map((v) => parseInt(v))
+        .filter((v) => !isNaN(v));
+      setReferencias(valores); // Restablece las referencias
+      setMarcos(3); // Restablece los marcos
+      setColor("#aabbcc"); // Restablece el color
+      setIsLoading(false); // Desactiva la animación de carga
+    }, 2000); // Simula un tiempo de carga de 2 segundos
   };
 
   return (
@@ -39,7 +44,7 @@ export default function PanelInputs({
       <h2 className="text-xl font-semibold mb-4 text-center">Configuración</h2>
 
       <div className="mb-4">
-        <label className="block font-medium mb-1">Referencias (separadas por espacio o coma):</label>
+        <label className="block font-medium mb-1">Referencias (separadas por coma):</label>
         <input
           type="text"
           value={entradaTexto}
@@ -97,6 +102,18 @@ export default function PanelInputs({
       >
         Ejecutar algoritmo
       </button>
+      
+      <button
+        onClick={manejarCambioReferencias}
+        className="w-full bg-blue-300 text-white py-2 rounded-lg font-semibold hover:bg-white-400 transition duration-200 mt-2"
+      >
+        {isLoading ? (
+          <div className="spinner"></div> // Muestra el spinner
+        ) : (
+          "Restablecer valores ⏲"
+        )}
+      </button>
+
     </div>
   );
 }
