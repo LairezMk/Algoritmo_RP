@@ -231,7 +231,7 @@ export default function FIFOPlus(sequence, numPages) {
             } else {
               secondChance[indexTime] = false;
               let framesArrayTimeCopy = [...framesArrayTime];
-              indexTime = framesArrayTime.indexOf(framesArrayTimeCopy.sort((a, b) => a - b)[1]);
+              indexTime = framesArrayTime.indexOf(framesArrayTimeCopy.sort((a, b) => b - a)[1]);
               framesArray[indexTime] = page;
               framesArrayTime[indexTime] = 0;
               secondChance[indexTime] = false;
