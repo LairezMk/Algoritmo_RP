@@ -9,6 +9,7 @@ export default function PanelInputs({
   color,
   setColor,
   onGenerar,
+  setPasos,
 }) {
   const valoresIniciales = "7, 0, 1, 2, 0, 3, 0";
   const [entradaTexto, setEntradaTexto] = useState(valoresIniciales);
@@ -35,6 +36,7 @@ export default function PanelInputs({
       setReferencias(valores); // Restablece las referencias
       setMarcos(3); // Restablece los marcos
       setColor("#aabbcc"); // Restablece el color
+      setPasos([]); // Limpia los pasos generados
       setIsLoading(false); // Desactiva la animación de carga
     }, 2000); // Simula un tiempo de carga de 2 segundos
   };

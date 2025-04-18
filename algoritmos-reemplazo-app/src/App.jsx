@@ -15,7 +15,7 @@ function App() {
   const [marcos, setMarcos] = useState(3);
   const [color, setColor] = useState("#aabbcc");
   const [pasos, setPasos] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  //const [isLoading, setIsLoading] = useState(false);
   //const [esOscuro, setEsOscuro] = useState(false);
 
    
@@ -56,6 +56,7 @@ function App() {
           color={color}
           setColor={setColor}
           onGenerar={ejecutarAlgoritmo}
+          setPasos={setPasos}
       
         />
       </div>
