@@ -10,93 +10,82 @@ function MatrixCombine(matrixA, matrixB, rows, cols) {
   return result;
 }
 
-export function SecondChance (sequence, numPages) {
-    const sequenceArray = sequence.split(' ').map(Number)
-    let pageFaults = 0
-    const framesArray = new Array(numPages).fill('-')
-    const framesArrayTime = new Array(numPages).fill(0)
-    const secondChance = new Array(numPages).fill('')
-    const framesChanges = new Array(numPages).fill(0)
-    const resultFramesMatrix = []
-    const resultMatrixChanges = []
-    const resultMatrixSecondChance = []
-  
-    for (let i = 0; i < sequenceArray.length; i++) {
-      const page = sequenceArray[i]
-      framesChanges.fill('0')
-      if (!framesArray.includes(page)) {
-        pageFaults++
-        if (framesArray.includes('-')) {
-          for (let j = 0; j < framesArray.length; j++) {
-            if (framesArray[j] === '-') {
-              framesArray[j] = page
-              framesArrayTime[j] = 0
-              framesChanges[j] = 1
-              break
-            }
-          }
-        } else {
-          let exit
-          let indexTime = framesArrayTime.indexOf(Math.max(...framesArrayTime))
-          if (secondChance[indexTime] === '') {
-            framesArray[indexTime] = page
-            framesArrayTime[indexTime] = 0
-            secondChance[indexTime] = ''
-            framesChanges[indexTime] = 1
-            exit = true
-          } else {
-            secondChance[indexTime] = ''
-            for (let j = 1; j < framesArray.length; j++) {
-              const framesArrayTimeCopy = [...framesArrayTime]
-              indexTime = framesArrayTime.indexOf(framesArrayTimeCopy.sort((a, b) => b - a)[j])
-              if (secondChance[indexTime] === '') {
-                framesArray[indexTime] = page
-                framesArrayTime[indexTime] = 0
-                secondChance[indexTime] = ''
-                framesChanges[indexTime] = 1
-                exit = true
-                break
-              } else {
-                secondChance[indexTime] = ''
-              }
-            }
-          }
-          if (exit === undefined) {
-            const indexTime = framesArrayTime.indexOf(Math.max(...framesArrayTime))
-            framesArray[indexTime] = page
-            secondChance[indexTime] = ''
-            framesArrayTime[indexTime] = 0
-            framesChanges[indexTime] = 1
+function SecondChance(sequence, numPages) {
+  const sequenceArray = sequence;
+  const framesArray = new Array(numPages).fill(null);
+  const framesArrayTime = new Array(numPages).fill(0);
+  const secondChance = new Array(numPages).fill(false);
+  const pasos = [];
+
+  for (let i = 0; i < sequenceArray.length; i++) {
+    const page = sequenceArray[i];
+    let fallo = false;
+
+    if (!framesArray.includes(page)) {
+      fallo = true;
+
+      if (framesArray.includes(null)) {
+        for (let j = 0; j < framesArray.length; j++) {
+          if (framesArray[j] === null) {
+            framesArray[j] = page;
+            framesArrayTime[j] = 0;
+            break;
           }
         }
       } else {
-        const indexTime = framesArray.indexOf(page)
-        secondChance[indexTime] = '*'
-      }
-      for (let j = 0; j < framesArrayTime.length; j++) {
-        if (framesArray[j] !== '-') {
-          framesArrayTime[j]++
+        let replaced = false;
+
+        // Intentamos encontrar el más antiguo sin segunda oportunidad
+        let indicesOrdenados = [...framesArrayTime.keys()]
+          .sort((a, b) => framesArrayTime[b] - framesArrayTime[a]);
+
+        for (let k = 0; k < indicesOrdenados.length; k++) {
+          let idx = indicesOrdenados[k];
+          if (!secondChance[idx]) {
+            framesArray[idx] = page;
+            framesArrayTime[idx] = 0;
+            secondChance[idx] = false;
+            replaced = true;
+            break;
+          } else {
+            secondChance[idx] = false; // Quitar vida extra
+          }
+        }
+
+        // Si no encontró ninguna sin vida, reemplaza la más antigua
+        if (!replaced) {
+          let indexTime = framesArrayTime.indexOf(Math.max(...framesArrayTime));
+          framesArray[indexTime] = page;
+          framesArrayTime[indexTime] = 0;
+          secondChance[indexTime] = false;
         }
       }
-      // console.log("Frames: ", framesArray, "Second: ", secondChance, "Time: ", framesArrayTime)
-      resultFramesMatrix.push([...framesArray])
-      resultMatrixChanges.push([...framesChanges])
-      resultMatrixSecondChance.push([...secondChance])
+    } else {
+      const index = framesArray.indexOf(page);
+      secondChance.fill(false); // Solo una vida extra activa
+      secondChance[index] = true;
     }
-  
-    const preMatrix = MatrixCombine(resultFramesMatrix, resultMatrixSecondChance, sequenceArray.length, numPages)
-    const resultMatrix = MatrixCombine(preMatrix, resultMatrixChanges, sequenceArray.length, numPages)
-  
-    return {
-      pageFaults,
-      resultMatrix
+
+    // Aumentamos tiempo de todos los marcos ocupados
+    for (let j = 0; j < framesArray.length; j++) {
+      if (framesArray[j] !== null) {
+        framesArrayTime[j]++;
+      }
     }
+
+    pasos.push({
+      pagina: page,
+      memoria: [...framesArray],
+      fallo: fallo,
+      vidaExtra: [...secondChance],
+    });
   }
 
-  const result = SecondChance("7 0 1 2 0 3 0 4 2 3 0 3 2 1 2 0", 4);
+  return pasos;
+}
 
-console.log("Page Faults:", result.pageFaults);
-console.log("Result Matrix:");
-result.resultMatrix.forEach((row, i) => {
-  console.log(`Paso ${i + 1}:`, row.map(cell => `[${cell.join(', ')}]`).join(' | '));
-});
+
+export default SecondChance;
+
+console.log(SecondChance([3, 2, 1, 5, 4, 1, 7, 2, 1, 3, 4, 0], 3));
+

@@ -38,6 +38,20 @@ const VistaAlgoritmo = ({ algoritmoActivo, resultados, color }) => {
             {descripcion}
               </p>
       </div>
+
+      {/*Slide para manejar la velocidad de la animación de las tablas, entre menos más lenta, y entre más inmediata*/}
+      <div className="flex justify-center mt-4">
+        <label className="text-white font-bold mr-2">Velocidad de animación:</label>
+        <input
+          type="range"
+          min="0"
+          max="2000"
+          step="100"
+          defaultValue="1000"
+          className="w-64 h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+        />
+        </div>
+
     </div>
   );
 };
