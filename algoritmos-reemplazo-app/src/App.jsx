@@ -4,6 +4,8 @@ import FIFO from "./algoritmos/fifo";
 import LRU from "./algoritmos/lru";
 import FIFOPlus from "./algoritmos/fifo+";
 import Optimo from "./algoritmos/optimo";
+import { SecondChance } from "./algoritmos/secondChance";
+import { Clock } from "./algoritmos/clock";
 import PanelInputs from "./components/PanelInputs";
 import VistaAlgoritmo from "./components/VistaAlgoritmo";
 import poto from "./assets/poto.png";
@@ -32,6 +34,12 @@ function App() {
         break;
       case "Optimo":
         resultado = Optimo(referencias, marcos);
+        break;
+      case "SecondChance":
+        resultado = SecondChance(referencias, marcos);
+        break;
+      case "Clock":
+        resultado = Clock(referencias, marcos);
         break;
       default:
         alert("Algoritmo no válido");
@@ -68,7 +76,7 @@ function App() {
       <div className="flex-1 p-8 flex flex-col gap-6 relative-z-0">
         {/* Tabs de algoritmos */}
         <div className="flex gap-4 justify-center text-xl font-bold mb-4 text-white-300">
-          {["FIFO", "LRU", "FIFOPlus", "Optimo"].map((alg) => (
+          {["FIFO", "LRU", "FIFOPlus", "Optimo", "SecondChance", "Clock"].map((alg) => (
             <button
               key={alg}
               onClick={() => {

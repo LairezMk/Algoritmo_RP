@@ -5,8 +5,11 @@ const explicaciones = {
   FIFO: "El algoritmo FIFO (First-In, First-Out) reemplaza la página que lleva más tiempo en memoria, sin considerar si fue usada recientemente.",
   LRU: "LRU (Least Recently Used) reemplaza la página que no ha sido usada en el mayor tiempo, asumiendo que es menos probable que se necesite pronto.",
   FIFOPlus: "FIFO+ es una mejora del FIFO tradicional. Añade una 'vida extra' temporal a una página recién ingresada, evitando que sea reemplazada inmediatamente.",
-  Optimo: "El algoritmo Óptimo reemplaza la página que no será utilizada por el mayor tiempo posible en el futuro. Es ideal pero requiere conocer el futuro."
+  Optimo: "El algoritmo Óptimo reemplaza la página que no será utilizada por el mayor tiempo posible en el futuro. Es ideal pero requiere conocer el futuro.",
+  SecondChance: "Second Chance mejora FIFO al revisar si la página más antigua fue usada recientemente. Si fue usada, se le da otra oportunidad y se mueve al final de la cola.",
+  Clock: "Clock es una versión eficiente de Second Chance. Usa un puntero circular para buscar páginas con bit 0 y reemplazarlas, dando oportunidad a las que fueron usadas recientemente.",
 };
+
 
 const VistaAlgoritmo = ({ algoritmoActivo, resultados, color }) => {
   const pasos = resultados?.[algoritmoActivo] || [];

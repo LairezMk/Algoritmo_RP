@@ -1,30 +1,3 @@
-//Copia para probar el algoritmo 
-
-// //Algoritmo FIFO para el reemplazo de páginas
-// export function FIFO(referencias, marcos){
-//     let memoria = new Array(marcos).fill(null); // Inicializa la memoria con marcos vacíos
-//     let fallos = 0; // Contador de fallos de página
-//     let indice = 0; // Índice para el marco FIFO
-
-//     for (let i = 0; i < referencias.length; i++) {
-//         let pagina = referencias[i]; // Página actual a procesar
-
-//         // Verifica si la página ya está en memoria
-//         if (!memoria.includes(pagina)) {
-//             // Si no está, se produce un fallo de página
-//             fallos++;
-//             memoria[indice] = pagina; // Reemplaza la página en el marco FIFO
-//             indice = (indice + 1) % marcos; // Avanza al siguiente marco circularmente
-//         }
-//     }
-
-//     console.log(`Número total de fallos de página: ${fallos}`); // Muestra el número total de fallos de página
-//     //return fallos; // Devuelve el número total de fallos de página
-// }
-
-//  // Ejemplo de uso del algoritmo 
-// console.log(FIFO([7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0], 3)); // Ejemplo de uso: [1, 2, 3] -> 4 fallos
-
 export default function FIFO(referencias, marcos) {
     let memoria = new Array(marcos).fill(null); // Inicializa la memoria con marcos vacíos
     let indice = 0; // Índice para el marco FIFO
