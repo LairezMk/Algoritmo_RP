@@ -56,35 +56,51 @@ const FrameDisplay = ({ pasos, color = '#00ffff', delay = 1000 }) => {
                 </motion.td>
               ))}
             </tr>
-
             {[...Array(maxMarcos)].map((_, marcoIndex) => (
               <tr key={marcoIndex}>
                 <td className="px-4 py-3 font-semibold text-left text-violet-300">Marco {marcoIndex + 1}</td>
-                {historial.map((paso, i) => (
-                  <motion.td
-                    key={i}
-                    className="px-4 py-3"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: i * 0.1 + 0.05 }}
-                  >
-                    <div className="relative inline-block w-10 h-10 rounded-lg border border-cyan-400 bg-[#0f172a] shadow-inner text-center leading-10 text-white">
-                      {paso.memoria[marcoIndex] ?? '-'}
+                {historial.map((paso, i) => {
+                  const hayPasoSiguiente = i < historial.length - 1;
+                  const valorActual = paso.memoria[marcoIndex];
+                  const valorSiguiente = hayPasoSiguiente ? historial[i + 1].memoria[marcoIndex] : undefined;
+                  const salio = hayPasoSiguiente && valorActual !== valorSiguiente && valorActual !== undefined;
 
-                      {paso.vidaExtra?.[marcoIndex] && (
-                        <span
-                          className="absolute -top-2 -right-2 animate-pulse text-lg"
-                          title="Vida extra"
-                        >
-                          🛡️
-                        </span>
-                      )}
-                    </div>
-                  </motion.td>
-                ))}
+                  return (
+                    <motion.td
+                      key={i}
+                      className="px-4 py-3"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: i * 0.1 + 0.05 }}
+                    >
+                      <div className="relative inline-block w-10 h-10 rounded-lg border border-cyan-400 bg-[#0f172a] shadow-inner text-center leading-10 text-white">
+                        {valorActual ?? '-'}
+
+                        {/* Vida extra */}
+                        {paso.vidaExtra?.[marcoIndex] && (
+                          <span
+                            className="absolute -top-2 -right-2 animate-pulse text-lg"
+                            title="Vida extra"
+                          >
+                            🛡️
+                          </span>
+                        )}
+
+                        {/* Emoji de salida */}
+                        {salio && (
+                          <span
+                            className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 text-xl"
+                            title="Este valor fue reemplazado en el siguiente paso"
+                          >
+                            ⬇
+                          </span>
+                        )}
+                      </div>
+                    </motion.td>
+                  );
+                })}
               </tr>
             ))}
-
             <tr>
               <td className="px-4 py-3 font-semibold text-left text-green-400 rounded-bl-2xl">Fallo</td>
               {historial.map((paso, i) => (
