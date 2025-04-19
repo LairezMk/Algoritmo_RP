@@ -1,15 +1,3 @@
-function MatrixCombine(matrixA, matrixB, rows, cols) {
-  const result = [];
-  for (let i = 0; i < rows; i++) {
-    const row = [];
-    for (let j = 0; j < cols; j++) {
-      row.push([matrixA[i][j], matrixB[i][j]]);
-    }
-    result.push(row);
-  }
-  return result;
-}
-
 function SecondChance(sequence, numPages) {
   const sequenceArray = sequence;
   const framesArray = new Array(numPages).fill(null);
@@ -62,7 +50,6 @@ function SecondChance(sequence, numPages) {
       }
     } else {
       const index = framesArray.indexOf(page);
-      secondChance.fill(false); // Solo una vida extra activa
       secondChance[index] = true;
     }
 
