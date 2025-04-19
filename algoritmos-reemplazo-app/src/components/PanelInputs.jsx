@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { div } from "framer-motion/client";
+import { useState, useEffect } from "react";
 
 export default function PanelInputs({
   referencias,
@@ -24,98 +24,99 @@ export default function PanelInputs({
     setReferencias(valores);
   }, [setReferencias]);
 
-
   const manejarCambioReferencias = () => {
-    setIsLoading(true); // Activa la animación de carga
+    setIsLoading(true);
     setTimeout(() => {
-      setEntradaTexto(valoresIniciales); // Restablece el texto de entrada
+      setEntradaTexto(valoresIniciales);
       const valores = valoresIniciales
         .split(/[\s,]+/)
         .map((v) => parseInt(v))
         .filter((v) => !isNaN(v));
-      setReferencias(valores); // Restablece las referencias
-      setMarcos(3); // Restablece los marcos
-      setColor("#aabbcc"); // Restablece el color
-      setPasos([]); // Limpia los pasos generados
-      setIsLoading(false); // Desactiva la animación de carga
-    }, 2000); // Simula un tiempo de carga de 2 segundos
+      setReferencias(valores);
+      setMarcos(3);
+      setColor("#aabbcc");
+      setPasos([]);
+      setIsLoading(false);
+    }, 2000);
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-md w-full max-w-md border border-gray-300">
-      <h2 className="text-xl font-semibold mb-4 text-center">Configuración</h2>
+    <div className="flex flex-col items-center justify-center h-full p-4 space-y-4">
+    <div className="bg-zinc-800 text-white p-6 rounded-2xl shadow-lg w-full max-w-md border border-zinc-700 space-y-5">
+      <h2 className="text-2xl font-bold text-center text-white mb-2">⚙️ Configuración</h2>
 
-      <div className="mb-4">
-        <label className="block font-medium mb-1">Referencias (separadas por coma):</label>
+      <div>
+        <label className="block text-sm font-medium mb-1 text-gray-300">Referencias (separadas por coma):</label>
         <input
           type="text"
           value={entradaTexto}
-          //Hacer que solo se puedan ingresar números enteros positivos y comas como separadores
           onChange={(e) => {
             const valor = e.target.value;
-            // Permitir solo números, comas y espacios
             const valorFiltrado = valor.replace(/[^0-9, ]/g, "");
             setEntradaTexto(valorFiltrado);
-        
-            // Convertir a un array de números enteros positivos
+
             const valores = valorFiltrado
-              .split(/[\s,]+/) // Separar por comas o espacios
+              .split(/[\s,]+/)
               .map((v) => parseInt(v))
-              .filter((v) => !isNaN(v) && v >= 0); // Filtrar valores no numéricos o negativos
-        
+              .filter((v) => !isNaN(v) && v >= 0);
+
             setReferencias(valores);
           }}
-          className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+          className="w-full bg-zinc-700 text-white border border-zinc-600 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           placeholder="Ej. 7, 0, 1, 2, 0, 3, 0"
         />
       </div>
 
-      <div className="mb-4">
-        <label className="block font-medium mb-1">Cantidad de marcos:</label>
+      <div>
+        <label className="block text-sm font-medium mb-1 text-gray-300">Cantidad de marcos:</label>
         <input
           type="number"
           min="1"
           max="5"
-          //hacer que solo se puedan ingresar números enteros positivos entre el rango definido
           value={marcos}
           onChange={(e) => {
             const valor = e.target.value;
             if (valor === "" || (Number(valor) >= 1 && Number(valor) <= 5)) {
-              setMarcos(valor === "" ? "" : Number(valor)); // Permite borrar temporalmente
+              setMarcos(valor === "" ? "" : Number(valor));
             }
           }}
-          className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+          className="w-full bg-zinc-700 text-white border border-zinc-600 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
         />
       </div>
 
-      <div className="mb-4">
-        <label className="block font-medium mb-1">Color del borde (hex):</label>
+      <div>
+        <label className="block text-sm font-medium mb-1 text-gray-300">Color del borde (hex):</label>
         <input
           type="color"
           value={color}
           onChange={(e) => setColor(e.target.value)}
-          className="w-full h-10 p-1 rounded-lg cursor-pointer"
+          className="w-full h-10 p-1 bg-zinc-700 rounded-lg cursor-pointer border border-zinc-600"
         />
       </div>
 
       <button
         onClick={onGenerar}
-        className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-200"
+        className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 rounded-lg font-semibold hover:from-blue-500 hover:to-indigo-500 transition"
       >
-        Ejecutar algoritmo
-      </button>
-      
-      <button
-        onClick={manejarCambioReferencias}
-        className="w-full bg-blue-300 text-white py-2 rounded-lg font-semibold hover:bg-white-400 transition duration-200 mt-2"
-      >
-        {isLoading ? (
-          <div className="spinner"></div> // Muestra el spinner
-        ) : (
-          "Restablecer valores ⏲"
-        )}
+        ▶ Ejecutar algoritmo
       </button>
 
+      <button
+        onClick={manejarCambioReferencias}
+        className="w-full bg-zinc-700 border border-blue-400 text-blue-300 py-2 rounded-lg font-semibold hover:bg-zinc-600 transition"
+      >
+        {isLoading ? (
+          <div className="flex justify-center items-center">
+            <div className="w-5 h-5 border-2 border-t-transparent border-blue-400 rounded-full animate-spin"></div>
+          </div>
+        ) : (
+          "🔄 Restablecer valores"
+        )}
+      </button>
     </div>
+
+  </div>
   );
 }
+
+ 
