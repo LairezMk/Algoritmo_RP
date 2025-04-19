@@ -30,6 +30,16 @@ const FrameDisplay = ({ pasos, color = '#00ffff', delay = 1000 }) => {
           boxShadow: `0 0 25px ${color}40`,
         }}
       >
+        {/* Resumen de fallos */}
+        <div className="mb-4 text-lg font-bold text-red-300 flex items-center gap-2">
+          <span>Fallos de página:</span>
+          <span className="bg-red-500/20 border border-red-400 rounded px-3 py-1 text-xl">
+            {historial.filter(p => p.fallo).length}
+          </span>
+          <span className="text-gray-400 text-base">
+            / {historial.length} referencias
+          </span>
+        </div>
         <table className="table-auto border-separate border-spacing-0 mx-auto w-full text-lg text-center font-medium text-white">
           <thead>
             <tr className="bg-[#111827] text-cyan-300">
