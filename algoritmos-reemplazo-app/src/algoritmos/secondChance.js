@@ -1,3 +1,15 @@
+function MatrixCombine(matrixA, matrixB, rows, cols) {
+  const result = [];
+  for (let i = 0; i < rows; i++) {
+    const row = [];
+    for (let j = 0; j < cols; j++) {
+      row.push([matrixA[i][j], matrixB[i][j]]);
+    }
+    result.push(row);
+  }
+  return result;
+}
+
 export function SecondChance (sequence, numPages) {
     const sequenceArray = sequence.split(' ').map(Number)
     let pageFaults = 0
@@ -80,3 +92,11 @@ export function SecondChance (sequence, numPages) {
       resultMatrix
     }
   }
+
+  const result = SecondChance("7 0 1 2 0 3 0 4 2 3 0 3 2 1 2 0", 4);
+
+console.log("Page Faults:", result.pageFaults);
+console.log("Result Matrix:");
+result.resultMatrix.forEach((row, i) => {
+  console.log(`Paso ${i + 1}:`, row.map(cell => `[${cell.join(', ')}]`).join(' | '));
+});
