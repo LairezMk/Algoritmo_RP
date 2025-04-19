@@ -42,7 +42,7 @@ export default function PanelInputs({
 
   return (
     <div className="flex flex-col items-center justify-center h-full p-4 space-y-4">
-    <div className="bg-zinc-800 text-white p-6 rounded-2xl shadow-lg w-full max-w-md border border-zinc-700 space-y-5">
+    <div className="bg-gradient-to-r from-[#0a0404] via-[#282175] to-[#130e73] text-white p-6 rounded-2xl shadow-lg w-full max-w-md border border-zinc-700 space-y-5">
       <h2 className="text-2xl font-bold text-center text-white mb-2">⚙️ Configuración</h2>
 
       <div>
@@ -120,7 +120,7 @@ export default function PanelInputs({
             }
             localStorage.setItem("historialReferencias", JSON.stringify(historial));
           }
-          onGenerar(); // Ejecutar el algoritmo
+          onGenerar(Date.now); // Ejecutar el algoritmo
         }}
         className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 rounded-lg font-semibold hover:from-blue-500 hover:to-indigo-500 transition"
       >

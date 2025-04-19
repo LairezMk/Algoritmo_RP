@@ -35,7 +35,10 @@ const FrameDisplay = ({ pasos, color = '#00ffff', delay = 1000 }) => {
             <tr className="bg-[#111827] text-cyan-300">
               <th className="px-4 py-3 rounded-tl-2xl text-left font-bold text-xl"> </th>
               {historial.map((_, index) => (
-                <th key={index} className="px-4 py-3 border-b border-cyan-500">
+                <th key={index} className={"px-4 py-3 border-b border-cyan-500" + 
+                  (index === 0 ? " border-l-4 border-cyan-500" : "" )
+                 }
+                  >
                   P {index + 1}
                 </th>
               ))}

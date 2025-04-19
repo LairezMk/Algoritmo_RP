@@ -17,6 +17,7 @@ function App() {
   const [marcos, setMarcos] = useState(3);
   const [color, setColor] = useState("#aabbcc");
   const [pasos, setPasos] = useState([]);
+  const [ejecucionKey, setEjecucionKey] = useState(0); // Para forzar la re-renderización
 
   const ejecutarAlgoritmo = () => {
     if (!referencias.length || marcos <= 0) return;
@@ -45,7 +46,8 @@ function App() {
         alert("Algoritmo no válido");
         return;
     }
-    setPasos(resultado);
+    setPasos([...resultado]);
+    setEjecucionKey(Date.now()); // Cambia la clave para forzar re-renderización
   };
   
   return (
@@ -97,6 +99,7 @@ function App() {
         {/* Vista del algoritmo seleccionado */}
         <div className="flex-1 overflow-auto bg-[#1e2a3a] rounded-2xl p-6 shadow-inner">
           <VistaAlgoritmo
+            key={ejecucionKey} // Forzar re-renderización al cambiar el algoritmo
             algoritmoActivo={algoritmoActivo}
             resultados={{ [algoritmoActivo]: pasos }}
             color={color}
