@@ -39,10 +39,13 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen w-screen bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] text-white flex font-sans">
+    <div className="min-h-screen w-screen bg-gradient-to-br from-[#3b1ee3] via-[#1a0919] to-[#20142b] text-white flex font-sans">
       {/* Sidebar izquierdo */}
-      <div className="w-90 px-6 py-8 bg-[#1c2331] shadow-xl rounded-r-3xl flex flex-col gap-6">
-        <div className="text-xl font-bold tracking-wider mb-4">Page Replacement UI</div>
+      <div className="w-110 px-6 py-8 bg-[#1c2331] shadow-xl rounded-r-3xl flex flex-col gap-6">
+        <div   className="text-3xl font-extrabold tracking-widest mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-800  drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]">
+                
+          Page Replacement Algorithms
+          </div>
         <PanelInputs
           referencias={referencias}
           setReferencias={setReferencias}

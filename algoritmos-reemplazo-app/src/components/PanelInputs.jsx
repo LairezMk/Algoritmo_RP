@@ -11,7 +11,7 @@ export default function PanelInputs({
   onGenerar,
   setPasos,
 }) {
-  const valoresIniciales = "7, 0, 1, 2, 0, 3, 0";
+  const valoresIniciales = "7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2, 0";
   const [entradaTexto, setEntradaTexto] = useState(valoresIniciales);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -61,10 +61,25 @@ export default function PanelInputs({
               .filter((v) => !isNaN(v) && v >= 0);
 
             setReferencias(valores);
+            
+            // //Guardar el valor en el historial del localStorage
+            // const historial = JSON.parse(localStorage.getItem("historialReferencias")) || [];
+            // if (valorFiltrado && !historial.includes(valorFiltrado)) {
+            //   historial.push(valorFiltrado);
+            //   localStorage.setItem("historialReferencias", JSON.stringify(historial));
+            // }
           }}
+
           className="w-full bg-zinc-700 text-white border border-zinc-600 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           placeholder="Ej. 7, 0, 1, 2, 0, 3, 0"
+          //Mostrar el historial de referencias en un select
+          list="historialReferencias"
         />
+        <datalist id="historialReferencias">
+          {JSON.parse(localStorage.getItem("historialReferencias") || "[]").map((item, index) => (
+            <option key={index} value={item} />
+          ))}
+        </datalist>
       </div>
 
       <div>
@@ -95,7 +110,18 @@ export default function PanelInputs({
       </div>
 
       <button
-        onClick={onGenerar}
+        onClick={() => {
+          // Guardar el valor en el historial del localStorage al ejecutar el algoritmo
+          const historial = JSON.parse(localStorage.getItem("historialReferencias")) || [];
+          if (entradaTexto && !historial.includes(entradaTexto)) {
+            historial.unshift(entradaTexto); // Agregar al inicio del historial
+            if (historial.length > 3) {
+              historial.pop(); // Limitar el historial a 3 elementos
+            }
+            localStorage.setItem("historialReferencias", JSON.stringify(historial));
+          }
+          onGenerar(); // Ejecutar el algoritmo
+        }}
         className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 rounded-lg font-semibold hover:from-blue-500 hover:to-indigo-500 transition"
       >
         ▶ Ejecutar algoritmo
