@@ -27,9 +27,13 @@ const VistaAlgoritmo = ({ algoritmoActivo, resultados, color }) => {
       )}
 
       {/* Explicación del algoritmo */}
-      <div className="bg-white border border-gray-300 shadow-md rounded-lg p-4 max-w-xl mx-auto mt-6 text-left text-sm text-gray-700">
-        <h3 className="font-semibold mb-2">¿Cómo funciona {algoritmoActivo}?</h3>
-        <p>{descripcion}</p>
+      <div className="bg-gradient-to-br from-[#3b1ee3] via-[#1a0919] to-[#20142b] border border-purple-600 shadow-lg rounded-2xl p-6 max-w-xl mx-auto mt-6 text-left text-sm text-white">
+        <h3 className="font-extrabold mb-4 text-center text-lg text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-800 drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]">
+          ¿Cómo funciona {algoritmoActivo}?
+        </h3>
+          <p className="leading-relaxed tracking-wide">
+            {descripcion}
+              </p>
       </div>
     </div>
   );

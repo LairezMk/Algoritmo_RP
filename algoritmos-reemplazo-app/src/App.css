@@ -65,3 +65,9 @@ body.dark {
   justify-content: center;
   height: 100vh; /* Centrado vertical */
 }
+
+.clip-curve {
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  overflow:hidden;
+}
