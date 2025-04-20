@@ -51,9 +51,9 @@ function App() {
   };
   
   return (
-    <div className="min-h-screen w-screen bg-gradient-to-br from-[#3b1ee3] via-[#1a0919] to-[#20142b] text-white flex font-sans items-stretch">
-      {/* Sidebar izquierdo */}
-      <div className="w-110 px-6 py-10 bg-[#1c2331] shadow-xl rounded-r-3xl flex flex-col gap-6 relative overflow-hidden z-10 max-h-[96.5vh] clip-curve transform -translate-x6 -translate-y6 mt-3">
+    <div className="h-screen w-screen overflow-hidden bg-gradient-to-br from-[#3b1ee3] via-[#1a0919] to-[#20142b] text-white flex font-sans">
+    {/* Sidebar izquierdo */}
+      <div className="w-110 px-6 py-10 bg-[#1c2331] shadow-xl rounded-r-3xl flex flex-col gap-6 relative z-10 max-h-screen clip-curve sticky left-0 top-0">
         <div   className="text-3xl font-extrabold tracking-widest mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-800  drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]">
                 Page Replacement Algorithms
         </div>
@@ -75,7 +75,7 @@ function App() {
       </div>
 
       {/* Contenido derecho */}
-      <div className="flex-1 p-8 flex flex-col gap-6 relative-z-0">
+      <div className="flex-1 p-8 flex flex-col gap-6 overflow-auto max-w-full">
         {/* Tabs de algoritmos */}
         <div className="flex gap-4 justify-center text-xl font-bold mb-4 text-white-300">
           {["FIFO", "LRU", "FIFOPlus", "Optimo", "SecondChance", "Clock"].map((alg) => (
@@ -97,7 +97,7 @@ function App() {
         </div>
 
         {/* Vista del algoritmo seleccionado */}
-        <div className="flex-1 overflow-auto bg-[#1e2a3a] rounded-2xl p-6 shadow-inner">
+        <div className="flex-1 overflow-auto bg-[#1e2a3a] rounded-2xl p-6 shadow-inner max-w-full">
           <VistaAlgoritmo
             key={ejecucionKey} // Forzar re-renderización al cambiar el algoritmo
             algoritmoActivo={algoritmoActivo}

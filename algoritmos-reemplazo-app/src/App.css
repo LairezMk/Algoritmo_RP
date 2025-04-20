@@ -1,8 +1,15 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
   text-align: center;
+}
+
+body {
+  background-color: #121212; /* O usa tu gradiente si prefieres */
+  color: white;
 }
 
 .logo {
@@ -11,12 +18,15 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+
 
 @keyframes logo-spin {
   from {
@@ -39,22 +49,6 @@
 
 .read-the-docs {
   color: #888;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  width: 100vw;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  background-color: rgb(255, 255, 255);
-  color: black;
-}
-
-/* Modo oscuro */
-body.dark {
-  background-color: #121212;
-  color: white;
 }
 
 /* Estilos del contenido */
