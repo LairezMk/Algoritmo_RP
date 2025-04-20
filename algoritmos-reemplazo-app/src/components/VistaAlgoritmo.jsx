@@ -15,6 +15,7 @@ const VistaAlgoritmo = ({ algoritmoActivo, resultados, color }) => {
   const pasos = resultados?.[algoritmoActivo] || [];
   const descripcion = explicaciones[algoritmoActivo] || "Algoritmo no reconocido.";
   const [delay, setDelay] = React.useState(1000); // Estado para la velocidad de la animación
+  //const delayInvertido = 2000 - delay; // Invertir el valor del delay para la animación
 
   return (
     <div className="flex-1 px-4">
@@ -32,10 +33,11 @@ const VistaAlgoritmo = ({ algoritmoActivo, resultados, color }) => {
 
       {/* Contenedor flex para el slider y la explicación */}
       <div className="flex flex-row justify-start items-start gap-26 mt-6 max-w-4xl mx- justify-between">
-        {/* Slider moderno */}
+        {/* Slider animación*/}
         <div className="flex flex-col items-center bg-gradient-to-br from-[#2d1a7e] via-[#1a0919] to-[#20142b] border border-purple-700 shadow-lg rounded-2xl p-6 min-w-[270px]">
           <label className="text-white font-bold mb-4 text-base">Velocidad de animación</label>
           <input
+          dir="rtl"
             type="range"
             min="0"
             max="2000"
@@ -63,7 +65,15 @@ const VistaAlgoritmo = ({ algoritmoActivo, resultados, color }) => {
               [&::-moz-range-thumb]:border-white
               "
           />
-          <span className="mt-2 text-xs text-gray-300">{delay} ms</span>
+          <span className="mt-2 text-xs text-gray-300">
+          {delay === 0
+    ? "Inmediato"
+    : delay <= 700
+    ? "Rápido"
+    : delay <= 1500
+    ? "Normal"
+    : "Lento"}
+</span>
         </div>
 
         {/* Explicación del algoritmo */}
