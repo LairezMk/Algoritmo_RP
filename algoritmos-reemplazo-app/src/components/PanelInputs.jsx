@@ -51,23 +51,29 @@ export default function PanelInputs({
           type="text"
           value={entradaTexto}
           onChange={(e) => {
-            const valor = e.target.value;
-            const valorFiltrado = valor.replace(/[^0-9, ]/g, "");
-            setEntradaTexto(valorFiltrado);
+            let valor = e.target.value;
 
-            const valores = valorFiltrado
-              .split(/[\s,]+/)
-              .map((v) => parseInt(v))
-              .filter((v) => !isNaN(v) && v >= 0);
+            // 1. Eliminar todo lo que no sea dígito o coma
+            valor = valor.replace(/[^0-9,]/g, "");
 
-            setReferencias(valores);
+            // 2. Reemplazar comas dobles o más por una sola coma
+            valor = valor.replace(/,+/g, ",");
+
+            // Actualiza el texto visible sin bloquear al usuario
+            setEntradaTexto(valor);
+
+            // Procesar el valor solo si es válido (sin comas al inicio o fin)
+            const valorProcesado = valor.replace(/^,|,$/g, "");
+            if (/^(\d+(,\d+)*)?$/.test(valorProcesado)) {
+              const valores = valorProcesado
+                .split(",")
+                .map((v) => parseInt(v))
+                .filter((v) => !isNaN(v) && v >= 0);
+
+              setReferencias(valores);
+            }
             
-            // //Guardar el valor en el historial del localStorage
-            // const historial = JSON.parse(localStorage.getItem("historialReferencias")) || [];
-            // if (valorFiltrado && !historial.includes(valorFiltrado)) {
-            //   historial.push(valorFiltrado);
-            //   localStorage.setItem("historialReferencias", JSON.stringify(historial));
-            // }
+            
           }}
 
           className="w-full bg-zinc-700 text-white border border-zinc-600 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
@@ -87,11 +93,11 @@ export default function PanelInputs({
         <input
           type="number"
           min="1"
-          max="5"
+          max="6"
           value={marcos}
           onChange={(e) => {
             const valor = e.target.value;
-            if (valor === "" || (Number(valor) >= 1 && Number(valor) <= 5)) {
+            if (valor === "" || (Number(valor) >= 1 && Number(valor) <= 6)) {
               setMarcos(valor === "" ? "" : Number(valor));
             }
           }}

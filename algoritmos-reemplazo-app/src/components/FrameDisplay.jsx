@@ -73,10 +73,14 @@ const FrameDisplay = ({ pasos, color = '#00ffff', delay = 1000 }) => {
               <tr key={marcoIndex}>
                 <td className="px-4 py-3 font-semibold text-left text-violet-300">Marco {marcoIndex + 1}</td>
                 {historial.map((paso, i) => {
-                  const hayPasoSiguiente = i < historial.length - 1;
+                  //const hayPasoSiguiente = i < historial.length - 1;
                   const valorActual = paso.memoria[marcoIndex];
-                  const valorSiguiente = hayPasoSiguiente ? historial[i + 1].memoria[marcoIndex] : undefined;
-                  const salio = hayPasoSiguiente && valorActual !== valorSiguiente && valorActual !== undefined;
+                  const valorAnterior = i > 0 ? historial[i - 1].memoria[marcoIndex] : undefined;
+                  const reemplazado =
+                  (i === 0 && marcoIndex === 0 &&  valorActual !== undefined) || // Primer paso: si hay valor, se pinta
+                  (i > 0 && valorActual !== valorAnterior && valorAnterior !== undefined);
+
+                  //const salio = hayPasoSiguiente && valorActual !== valorSiguiente && valorActual !== undefined;
 
                   return (
                     <motion.td
@@ -86,8 +90,15 @@ const FrameDisplay = ({ pasos, color = '#00ffff', delay = 1000 }) => {
                       animate={{ opacity: 1 }}
                       transition={{ delay: i * 0.1 + 0.05 }}
                     >
-                      <div className="relative inline-block w-10 h-10 rounded-lg border border-cyan-400 bg-[#0f172a] shadow-inner text-center leading-10 text-white">
-                        {valorActual ?? '-'}
+                      <div className={`relative inline-block w-10 h-10 rounded-lg border bg-[#0f172a] shadow-inner text-center leading-10 text-white
+              ${reemplazado ? "border-red-400" : "border-cyan-400"}
+            `}
+            style={{
+              borderWidth: "2px",
+              transition: "border-color 0.3s"
+            }}
+          >
+            {valorActual ?? '-'}
 
                         {/* Vida extra */}
                         {paso.vidaExtra?.[marcoIndex] && (
@@ -99,7 +110,7 @@ const FrameDisplay = ({ pasos, color = '#00ffff', delay = 1000 }) => {
                           </span>
                         )}
 
-                        {/* Emoji de salida */}
+                        {/* Emoji de salida
                         {salio && (
                           <span
                             className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 text-xl"
@@ -107,7 +118,7 @@ const FrameDisplay = ({ pasos, color = '#00ffff', delay = 1000 }) => {
                           >
                             ⬇
                           </span>
-                        )}
+                        )} */}
                       </div>
                     </motion.td>
                   );
