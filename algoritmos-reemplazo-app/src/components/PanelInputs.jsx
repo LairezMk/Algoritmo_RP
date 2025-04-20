@@ -93,11 +93,11 @@ export default function PanelInputs({
         <input
           type="number"
           min="1"
-          max="6"
+          max="10"
           value={marcos}
           onChange={(e) => {
             const valor = e.target.value;
-            if (valor === "" || (Number(valor) >= 1 && Number(valor) <= 6)) {
+            if (valor === "" || (Number(valor) >= 1 && Number(valor) <= 10)) {
               setMarcos(valor === "" ? "" : Number(valor));
             }
           }}

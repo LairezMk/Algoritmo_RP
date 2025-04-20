@@ -55,7 +55,7 @@ function App() {
     {/* Sidebar izquierdo */}
       <div className="w-110 px-6 py-10 bg-[#1c1a2e] shadow-xl rounded-r-3xl flex flex-col gap-6 relative z-10 max-h-screen clip-curve sticky left-0 top-0">
         <div   className="text-3xl font-extrabold tracking-widest mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-800  drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]">
-                Page Replacement Algorithms
+                PAGE REPLACEMENT ALGORITHMS
         </div>
 
         <img src={poto} alt="Bad Bunny" width="300" height="300" className=" mx-auto mb-4 py-1 shadow-lg" />
@@ -75,7 +75,7 @@ function App() {
       {/* Contenido derecho */}
       <div className="flex-1 p-8 flex flex-col gap-6 overflow-auto max-w-full">
         {/* Tabs de algoritmos */}
-        <div className="flex gap-4 justify-center text-xl font-bold mb-4 text-white-300">
+        <div className="flex gap-4 justify-center text-2xl font-extrabold mb-4 text-white-600 ">
           {["FIFO", "LRU", "FIFOPlus", "Optimo", "SecondChance", "Clock"].map((alg) => (
             <button
               key={alg}
