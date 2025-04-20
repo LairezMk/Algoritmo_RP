@@ -53,14 +53,12 @@ function App() {
   return (
     <div className="h-screen w-screen overflow-hidden bg-gradient-to-br from-[#3b1ee3] via-[#1a0919] to-[#20142b] text-white flex font-sans">
     {/* Sidebar izquierdo */}
-      <div className="w-110 px-6 py-10 bg-[#1c2331] shadow-xl rounded-r-3xl flex flex-col gap-6 relative z-10 max-h-screen clip-curve sticky left-0 top-0">
+      <div className="w-110 px-6 py-10 bg-[#1c1a2e] shadow-xl rounded-r-3xl flex flex-col gap-6 relative z-10 max-h-screen clip-curve sticky left-0 top-0">
         <div   className="text-3xl font-extrabold tracking-widest mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-800  drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]">
                 Page Replacement Algorithms
         </div>
 
         <img src={poto} alt="Bad Bunny" width="300" height="300" className=" mx-auto mb-4 py-1 shadow-lg" />
-
-          
 
         <PanelInputs
           referencias={referencias}
@@ -97,7 +95,7 @@ function App() {
         </div>
 
         {/* Vista del algoritmo seleccionado */}
-        <div className="flex-1 overflow-auto bg-[#1e2a3a] rounded-2xl p-6 shadow-inner max-w-full">
+        <div className="flex-1 overflow-auto bg-[#1c1a2e] rounded-2xl p-6 shadow-inner max-w-full">
           <VistaAlgoritmo
             key={ejecucionKey} // Forzar re-renderización al cambiar el algoritmo
             algoritmoActivo={algoritmoActivo}
