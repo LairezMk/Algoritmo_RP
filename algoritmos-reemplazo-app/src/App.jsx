@@ -51,31 +51,33 @@ function App() {
   };
   
   return (
-    <div className="h-screen w-screen overflow-hidden bg-gradient-to-br from-[#3b1ee3] via-[#1a0919] to-[#20142b] text-white flex font-sans">
-    {/* Sidebar izquierdo */}
-      <div className="w-110 px-6 py-10 bg-[#1c1a2e] shadow-xl rounded-r-3xl flex flex-col gap-6 relative z-10 max-h-screen clip-curve sticky left-0 top-0">
-        <div   className="text-3xl font-extrabold tracking-widest mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-800  drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]">
-                PAGE REPLACEMENT ALGORITHMS
+    <div className="h-screen w-screen overflow-hidden bg-gradient-to-br from-[#3b1ee3] via-[#1a0919] to-[#20142b] text-white flex flex-col lg:flex-row font-sans">
+      {/* Sidebar izquierdo */}
+      <div className="w-full lg:w-[28rem] h-screen bg-[#1c1a2e] shadow-xl lg:rounded-r-3xl flex flex-col relative z-10 clip-curve">
+        <div className="overflow-auto p-6 flex flex-col gap-6">
+          <div className="text-2xl lg:text-3xl text-center font-extrabold tracking-widest mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-800 drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]">
+            PAGE REPLACEMENT ALGORITHMS
+          </div>
+  
+          <img src={poto} alt="Bad Bunny" className="mx-auto mb-4 w-[200px] h-[200px] lg:w-[300px] lg:h-[300px] py-1 shadow-lg" />
+  
+          <PanelInputs
+            referencias={referencias}
+            setReferencias={setReferencias}
+            marcos={marcos}
+            setMarcos={setMarcos}
+            color={color}
+            setColor={setColor}
+            onGenerar={ejecutarAlgoritmo}
+            setPasos={setPasos}
+          />
         </div>
-
-        <img src={poto} alt="Bad Bunny" width="300" height="300" className=" mx-auto mb-4 py-1 shadow-lg" />
-
-        <PanelInputs
-          referencias={referencias}
-          setReferencias={setReferencias}
-          marcos={marcos}
-          setMarcos={setMarcos}
-          color={color}
-          setColor={setColor}
-          onGenerar={ejecutarAlgoritmo}
-          setPasos={setPasos}
-        />
       </div>
-
+  
       {/* Contenido derecho */}
-      <div className="flex-1 p-8 flex flex-col gap-6 overflow-auto max-w-full">
+      <div className="flex-1 p-4 lg:p-8 flex flex-col gap-4 overflow-auto max-w-full">
         {/* Tabs de algoritmos */}
-        <div className="flex gap-4 justify-center text-2xl font-extrabold mb-4 text-white-600 ">
+        <div className="flex flex-wrap gap-3 justify-center text-xl lg:text-2xl font-extrabold mb-2">
           {["FIFO", "LRU", "FIFOPlus", "Optimo", "SecondChance", "Clock"].map((alg) => (
             <button
               key={alg}
@@ -83,7 +85,7 @@ function App() {
                 setAlgoritmoActivo(alg);
                 setPasos([]);
               }}
-              className={`px-5 py-2 rounded-xl text-3xl font-extrabold transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 ${
+              className={`px-4 py-2 rounded-xl text-base lg:text-2xl font-bold transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 ${
                 algoritmoActivo === alg
                   ? "bg-purple-600 text-white animate-float"
                   : "bg-[#2e3a59] text-gray-300 hover:bg-[#3d4a6a]"
@@ -93,11 +95,11 @@ function App() {
             </button>
           ))}
         </div>
-
+  
         {/* Vista del algoritmo seleccionado */}
-        <div className="flex-1 overflow-auto bg-[#1c1a2e] rounded-2xl p-6 shadow-inner max-w-full">
+        <div className="flex-1 overflow-auto bg-[#1c1a2e] rounded-2xl p-4 lg:p-6 shadow-inner max-w-full">
           <VistaAlgoritmo
-            key={ejecucionKey} // Forzar re-renderización al cambiar el algoritmo
+            key={ejecucionKey}
             algoritmoActivo={algoritmoActivo}
             resultados={{ [algoritmoActivo]: pasos }}
             color={color}
@@ -105,7 +107,7 @@ function App() {
         </div>
       </div>
     </div>
-  );
+  );  
 }
 
 export default App;

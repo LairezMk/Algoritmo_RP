@@ -1,8 +1,6 @@
-import { div } from "framer-motion/client";
 import { useState, useEffect } from "react";
 
 export default function PanelInputs({
-  referencias,
   setReferencias,
   marcos,
   setMarcos,
@@ -150,5 +148,3 @@ export default function PanelInputs({
   </div>
   );
 }
-
- 
